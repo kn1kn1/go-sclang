@@ -18,6 +18,7 @@
 // Package sclang provides a proxy class for sclang (SuperCollider client application).
 package sclang
 
+// The code is a port of ScLang.py (SuperCollider mode for gedit).
 import (
 	"errors"
 	"io"
@@ -133,7 +134,7 @@ func (sclang *Sclang) ToggleRecording() error {
 		if err != nil {
 			return err
 		}
-		time.Sleep(100 * time.Millisecond)
+		time.Sleep(100 * time.Millisecond) // WORKAROUND give server some time to prepare
 		err = sclang.Evaluate("s.record;", true)
 		if err != nil {
 			return err
@@ -143,6 +144,7 @@ func (sclang *Sclang) ToggleRecording() error {
 	return nil
 }
 
+// Restart restarts the sclang process.
 func (sclang *Sclang) Restart() error {
 	err := sclang.Dispose()
 	if err != nil {
