@@ -96,9 +96,9 @@ func (sclang *Sclang) Evaluate(code string, silent bool) error {
 
 	sclang.StdinWriter.Write([]byte(code))
 	if silent {
-		sclang.StdinWriter.Write([]byte("\x1b"))
+		sclang.StdinWriter.Write([]byte { 0x1b })
 	} else {
-		sclang.StdinWriter.Write([]byte("\x0c"))
+		sclang.StdinWriter.Write([]byte { 0x0c })
 	}
 	return nil
 }

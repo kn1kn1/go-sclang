@@ -1,10 +1,10 @@
 package main
 
 import (
+	"../../sclang"
 	"code.google.com/p/go.net/websocket"
 	"flag"
 	"fmt"
-	"github.com/kn1kn1/go-sclang/sclang"
 	"io"
 	"net/http"
 	// "os"
