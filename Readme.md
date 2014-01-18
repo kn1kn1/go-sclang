@@ -11,10 +11,9 @@ import (
 	"github.com/kn1kn1/go-sclang/sclang"
 	"os"
 )
-
 const PathToSclang = "/Applications/SuperCollider/SuperCollider.app/Contents/Resources/"
 var stdoutWriter io.Writer = os.Stdout
-sclangObj, err = sclang.Start(PathToSclang, &stdoutWriter)
+sclangObj, err := sclang.Start(PathToSclang, &stdoutWriter)
 ```
 You may find more usage in ./sclang/example/sclang_example.go
 
