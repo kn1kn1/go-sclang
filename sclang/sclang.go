@@ -14,6 +14,8 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+// Package sclang provides a proxy class for sclang (SuperCollider client application).
 package sclang
 
 import (
@@ -31,6 +33,7 @@ type Sclang struct {
 	Recording    bool
 }
 
+// Start starts a sclang process and returns the Sclang struct.
 func Start(pathToSclang string, stdoutWriter *io.Writer) (sclang *Sclang, err error) {
 	sclang = &Sclang{}
 	err = sclang.Init(pathToSclang, stdoutWriter)
@@ -40,6 +43,7 @@ func Start(pathToSclang string, stdoutWriter *io.Writer) (sclang *Sclang, err er
 	return sclang, nil
 }
 
+// Init initializes the Sclang struct with the specified pathToSclang and stdoutWriter.
 func (sclang *Sclang) Init(pathToSclang string, stdoutWriter *io.Writer) error {
 	sclang.PathToSclang = pathToSclang
 	sclang.StdoutWriter = stdoutWriter
@@ -66,6 +70,7 @@ func (sclang *Sclang) Init(pathToSclang string, stdoutWriter *io.Writer) error {
 	return nil
 }
 
+// Dispose ends the sclang process.
 func (sclang *Sclang) Dispose() error {
 	err := sclang.StopServer()
 	if err != nil {
@@ -89,6 +94,7 @@ func (sclang *Sclang) Dispose() error {
 	return nil
 }
 
+// Evaluate makes the sclang process to evaluate the specified code.
 func (sclang *Sclang) Evaluate(code string, silent bool) error {
 	if sclang.StdinWriter == nil {
 		return errors.New("sclang#StdinWriter is nil.")
@@ -96,9 +102,9 @@ func (sclang *Sclang) Evaluate(code string, silent bool) error {
 
 	sclang.StdinWriter.Write([]byte(code))
 	if silent {
-		sclang.StdinWriter.Write([]byte { 0x1b })
+		sclang.StdinWriter.Write([]byte{0x1b})
 	} else {
-		sclang.StdinWriter.Write([]byte { 0x0c })
+		sclang.StdinWriter.Write([]byte{0x0c})
 	}
 	return nil
 }
