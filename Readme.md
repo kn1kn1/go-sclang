@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.org/kn1kn1/go-sclang.png?branch=master)](https://travis-ci.org/kn1kn1/go-sclang)
-
 # go-sclang
 go-sclang is a library for go which enables to execute and comunicate with SuperCollider programming language (sclang).
 
