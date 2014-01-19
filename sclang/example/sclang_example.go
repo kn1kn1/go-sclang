@@ -1,7 +1,7 @@
 package main
 
 import (
-	//"../../sclang"
+	// "../../sclang"
 	"code.google.com/p/go.net/websocket"
 	"flag"
 	"github.com/kn1kn1/go-sclang/sclang"

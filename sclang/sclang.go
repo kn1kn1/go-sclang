@@ -26,12 +26,23 @@ import (
 	"time"
 )
 
+// Sclang represents a sclang process.
 type Sclang struct {
+	// PathToSclang holds the parent path of the sclang command.
 	PathToSclang string
+
+	// StdoutWriter specifies the destination stream to where the process's
+	// standard output will be written.
 	StdoutWriter *io.Writer
-	StdinWriter  io.WriteCloser
+
+	// StdinWriter holds the pipe connected to the process's standard input.
+	StdinWriter io.WriteCloser
+
+	// StdoutReader holds the pipe connected to the process's standard output.
 	StdoutReader io.ReadCloser
-	Recording    bool
+
+	// Recording holds whether the sclang process is in the recoring status.
+	Recording bool
 }
 
 // Start starts a sclang process and returns the Sclang struct.
