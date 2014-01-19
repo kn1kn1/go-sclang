@@ -110,18 +110,22 @@ func (sclang *Sclang) Evaluate(code string, silent bool) error {
 	return nil
 }
 
+// StartServer starts the default server (scsynth).
 func (sclang *Sclang) StartServer() error {
 	return sclang.Evaluate("Server.default.boot;", false)
 }
 
+// StopServer stops the default server.
 func (sclang *Sclang) StopServer() error {
 	return sclang.Evaluate("Server.default.quit;", false)
 }
 
+// StopSound Stop the sound.
 func (sclang *Sclang) StopSound() error {
 	return sclang.Evaluate("thisProcess.stop;", false)
 }
 
+// ToggleRecording starts/stops recording.
 func (sclang *Sclang) ToggleRecording() error {
 	if sclang.Recording {
 		err := sclang.Evaluate("s.stopRecording;", true)
@@ -134,7 +138,7 @@ func (sclang *Sclang) ToggleRecording() error {
 		if err != nil {
 			return err
 		}
-		time.Sleep(100 * time.Millisecond) // WORKAROUND give server some time to prepare
+		time.Sleep(100 * time.Millisecond) // WORKAROUND - give server some time to prepare
 		err = sclang.Evaluate("s.record;", true)
 		if err != nil {
 			return err
