@@ -131,7 +131,7 @@ func (sclang *Sclang) StopServer() error {
 	return sclang.Evaluate("Server.default.quit;", false)
 }
 
-// StopSound Stop the sound.
+// StopSound stops the sound.
 func (sclang *Sclang) StopSound() error {
 	return sclang.Evaluate("thisProcess.stop;", false)
 }
