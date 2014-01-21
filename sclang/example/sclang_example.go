@@ -4,9 +4,8 @@ import (
 	// "../../sclang"
 	"code.google.com/p/go.net/websocket"
 	"flag"
-	"github.com/kn1kn1/go-sclang/sclang"
 	"fmt"
-	"io"
+	"github.com/kn1kn1/go-sclang/sclang"
 	"net/http"
 	// "os"
 )
@@ -55,11 +54,8 @@ func cmdServer(ws *websocket.Conn) {
 		fmt.Printf("recv:%#v\n", msg)
 		switch msg.Tag {
 		case "init":
-			// var stdoutWriter io.Writer = os.Stdout
-			var stdoutWriter io.Writer
-			wsWriter := WebSocketWriter{ws}
-			stdoutWriter = &wsWriter
-			sclangObj, err = sclang.Start(PathToSclang, &stdoutWriter)
+			sclangObj, err = sclang.Start(PathToSclang, &WebSocketWriter{ws})
+			//sclangObj, err = sclang.Start(PathToSclang, os.Stdout)
 		case "start_server":
 			err = sclangObj.StartServer()
 		case "stop_server":

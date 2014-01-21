@@ -46,9 +46,9 @@ type Sclang struct {
 }
 
 // Start starts a sclang process and returns the Sclang struct.
-func Start(pathToSclang string, stdoutWriter *io.Writer) (sclang *Sclang, err error) {
+func Start(pathToSclang string, stdoutWriter io.Writer) (sclang *Sclang, err error) {
 	sclang = &Sclang{}
-	err = sclang.Init(pathToSclang, stdoutWriter)
+	err = sclang.Init(pathToSclang, &stdoutWriter)
 	if err != nil {
 		return nil, err
 	}
