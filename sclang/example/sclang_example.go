@@ -41,6 +41,7 @@ var sclangObj *sclang.Sclang
 // cmdServer handles a json string sent from client using websocket.JSON.
 func cmdServer(ws *websocket.Conn) {
 	fmt.Printf("cmdServer %#v\n", ws.Config())
+	defer ws.Close()
 
 	for {
 		var msg T
