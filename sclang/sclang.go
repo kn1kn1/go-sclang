@@ -33,7 +33,7 @@ type Sclang struct {
 
 	// StdoutWriter specifies the destination stream to where the process's
 	// standard output will be written.
-	StdoutWriter *io.Writer
+	StdoutWriter io.Writer
 
 	// StdinWriter holds the pipe connected to the process's standard input.
 	StdinWriter io.WriteCloser
@@ -48,7 +48,7 @@ type Sclang struct {
 // Start starts a sclang process and returns the Sclang struct.
 func Start(pathToSclang string, stdoutWriter io.Writer) (sclang *Sclang, err error) {
 	sclang = &Sclang{}
-	err = sclang.Init(pathToSclang, &stdoutWriter)
+	err = sclang.Init(pathToSclang, stdoutWriter)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ func Start(pathToSclang string, stdoutWriter io.Writer) (sclang *Sclang, err err
 }
 
 // Init initializes the Sclang struct with the specified pathToSclang and stdoutWriter.
-func (sclang *Sclang) Init(pathToSclang string, stdoutWriter *io.Writer) error {
+func (sclang *Sclang) Init(pathToSclang string, stdoutWriter io.Writer) error {
 	sclang.PathToSclang = pathToSclang
 	sclang.StdoutWriter = stdoutWriter
 
@@ -66,7 +66,7 @@ func (sclang *Sclang) Init(pathToSclang string, stdoutWriter *io.Writer) error {
 	if err != nil {
 		return err
 	}
-	go io.Copy(*stdoutWriter, sclang.StdoutReader)
+	go io.Copy(stdoutWriter, sclang.StdoutReader)
 
 	sclang.StdinWriter, err = cmd.StdinPipe()
 	if err != nil {
